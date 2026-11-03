@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#090909">
+<title>Security Alert</title>
+<style>
+  :root { color-scheme: dark; --red:#ff2638; --bg:#080808; }
+  * { box-sizing:border-box }
+  html,body { margin:0; min-height:100%; background:var(--bg); color:#f7f7f7; font-family:Arial,Helvetica,sans-serif }
+  body { min-height:100vh; display:grid; place-items:center; overflow:hidden }
+  .screen { width:min(900px,94vw); padding:30px 20px; text-align:center }
+  .shield { width:78px; height:78px; margin:0 auto 22px; border:3px solid var(--red); color:var(--red); border-radius:50%; display:grid; place-items:center; font-size:42px; box-shadow:0 0 30px #ff263855 }
+  .eyebrow { color:#ff6a76; letter-spacing:.22em; font-size:12px; font-weight:700 }
+  h1 { color:var(--red); font-size:clamp(34px,8vw,76px); line-height:.98; margin:15px 0; text-shadow:0 0 24px #ff263866 }
+  .sub { color:#c9c9c9; font-size:clamp(14px,2.5vw,18px); line-height:1.6 }
+  .panel { margin:26px auto; max-width:620px; border:1px solid #6d2028; background:#16090b; padding:18px; text-align:left; border-radius:10px; font:13px/1.8 ui-monospace,SFMono-Regular,Consolas,monospace; color:#ff929b }
+  .panel b { color:#fff }
+  .bar { height:7px; background:#321116; border-radius:8px; overflow:hidden; margin-top:12px }
+  .bar span { display:block; width:100%; height:100%; background:var(--red); transform-origin:left; animation:scan 2.4s ease-in-out infinite alternate }
+  @keyframes scan { from { transform:scaleX(.08) } to { transform:scaleX(1) } }
+  .reveal { display:none; border:1px solid #28794b; background:#07170e; border-radius:14px; padding:24px; margin:22px auto; max-width:620px }
+  .reveal h2 { color:#62e695; margin:0 0 10px; font-size:clamp(27px,6vw,44px) }
+  .reveal p { color:#d5f4df; line-height:1.6; margin:8px 0 }
+  button { border:0; border-radius:8px; padding:13px 20px; background:var(--red); color:white; font-weight:700; font-size:15px; cursor:pointer }
+  button:focus-visible { outline:3px solid white; outline-offset:3px }
+  .fine { color:#777; font-size:12px; margin-top:24px }
+  .show-reveal .alert { display:none }
+  .show-reveal .reveal { display:block }
+  @media (prefers-reduced-motion: reduce) { .bar span { animation:none } }
+</style>
+</head>
+<body>
+<main class="screen" id="app">
+  <section class="alert" aria-live="polite">
+    <div class="shield" aria-hidden="true">!</div>
+    <div class="eyebrow">CYBERSECURITY AWARENESS SIMULATION</div>
+    <h1>YOU ARE<br>HACKED!</h1>
+    <p class="sub">A suspicious security event has been simulated on this screen.</p>
+    <div class="panel">
+      <div><b>[SIMULATION]</b> Initializing security check...</div>
+      <div><b>[SIMULATION]</b> Scanning browser session...</div>
+      <div><b>[SIMULATION]</b> No device access or data collection.</div>
+      <div class="bar" aria-label="Decorative animation"><span></span></div>
+    </div>
+    <p class="sub">Wait for the reveal...</p>
+    <button id="revealNow" type="button">Reveal prank now</button>
+  </section>
+
+  <section class="reveal" role="status" aria-live="polite">
+    <div style="font-size:42px" aria-hidden="true">😂</div>
+    <h2>JUST A PRANK!</h2>
+    <p>You scanned a QR code that opened a harmless webpage.</p>
+    <p><b>Your device was not hacked.</b> This page did not access your camera, files, passwords, or contacts, and it did not collect personal data.</p>
+    <button id="again" type="button">Show alert again</button>
+  </section>
+  <p class="fine">Harmless cybersecurity awareness demo · No tracking · No data collection</p>
+</main>
+<script>
+  const app = document.getElementById('app');
+  function reveal() { app.classList.add('show-reveal'); }
+  function replay() { app.classList.remove('show-reveal'); window.setTimeout(reveal, 4500); }
+  document.getElementById('revealNow').addEventListener('click', reveal);
+  document.getElementById('again').addEventListener('click', replay);
+  window.setTimeout(reveal, 4500);
+</script>
+</body>
+</html>
